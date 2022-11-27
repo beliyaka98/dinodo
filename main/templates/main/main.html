@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="{% static 'main/main.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!--google fonts-->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;300;500;800;900&display=swap" rel="stylesheet">
+  <!--google icons-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <aside>
+      <div class="top">
+        <div class="logo">
+          <img src="{% static 'main/alligator.png'%}">
+          <span class="logo-text">Dino<span class="success">Do</span></span>
+        </div>
+        <div class="close" id="close-btn">
+          <span class="material-icons-outlined">close</span>
+        </div>
+      </div>
+      <div class="sidebar">
+        <a href="#" class="active">
+          <span class="material-icons-outlined">grid_view</span>
+          <h3>ToDo</h3>
+        </a>
+        <a href="#">
+          <span class="material-icons-outlined">table_chart</span>
+          <h3>Table</h3>
+        </a>
+        <a href="#">
+          <span class="material-icons-outlined">local_fire_department</span>
+          <h3>Challenges</h3>
+        </a>
+        <a href="#">
+          <span class="material-icons-outlined">group</span>
+          <h3>Friends</h3>
+        </a>
+        <a href="#">
+          <span class="material-icons-outlined">calendar_month</span>
+          <h3>Calendar</h3>
+        </a>
+        <a href="{% url 'logout' %}">
+          <span class="material-icons-outlined">logout</span>
+          <h3>Logout</h3>
+        </a>
+      </div>
+    </aside>
+    <main>
+      <div class="top-main">
+        <div class="main-text">
+          <h1>Good Evening, {{request.user}}!</h1>
+          <h1 class="second">Do whatever you want!</h1>
+        </div>
+
+        <div class="date-main">
+          <h5>{{weekday}}</h5>
+          <span class="date-int">{{day}}</span>
+          <h4>{{month}}</h4>
+        </div>
+      </div>
+      <div class="tasks">
+        <div class="active-tasks">
+          {% for task in tasks %}
+            <div class="task-card">
+              <label>
+                <input type="checkbox" class="chkbx">
+                <span>{{task.title}}</span>
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+        <form method="post">
+          <div class="new-task">
+            <div class="task-card-new">
+              {% csrf_token %}
+              <input type="text" placeholder="New task" class="task-input" name="new-task" id="new-task">
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+    <div class="rightside">
+      <div class="challenges">
+        <div class="card-right">
+          asdasda
+        </div>
+      </div>
+      <div class="notifications">
+        <div class="card-right">
+          {% for challenge in challenges %}
+            <div class="item-right">
+              <div class="wads">
+                <div class="progress">
+                  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="60px" height="60px">
+                     <defs>
+                        <linearGradient id="GradientColor">
+                           <stop offset="0%" stop-color="#e91e63" />
+                           <stop offset="100%" stop-color="#673ab7" />
+                        </linearGradient>
+                     </defs>
+                     <circle cx="30" cy="30" r="26" stroke-linecap="round" style="stroke-dashoffset: calc(164 - 164*({{challenge.self_hours}}/{{challenge.challenge.hours}})); stroke: {{challenge.challenge.color}}"/>
+                   </svg>
+                  <span class="level">{{challenge.self_hours}}</span>
+                </div>
+              </div>
+              <span class="adaw">{{challenge.challenge}}</span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
