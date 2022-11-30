@@ -1,57 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link rel="stylesheet" href="{% static 'main/main.css' %}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!--google fonts-->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;300;500;800;900&display=swap" rel="stylesheet">
-  <!--google icons-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-</head>
-<body>
-  <div class="container">
-    <aside>
-      <div class="top">
-        <div class="logo">
-          <img src="{% static 'main/alligator.png'%}">
-          <span class="logo-text">Dino<span class="success">Do</span></span>
-        </div>
-        <div class="close" id="close-btn">
-          <span class="material-icons-outlined">close</span>
-        </div>
-      </div>
-      <div class="sidebar">
-        <a href="#" class="active">
-          <span class="material-icons-outlined">grid_view</span>
-          <h3>ToDo</h3>
-        </a>
-        <a href="#">
-          <span class="material-icons-outlined">table_chart</span>
-          <h3>Table</h3>
-        </a>
-        <a href="#">
-          <span class="material-icons-outlined">local_fire_department</span>
-          <h3>Challenges</h3>
-        </a>
-        <a href="#">
-          <span class="material-icons-outlined">group</span>
-          <h3>Friends</h3>
-        </a>
-        <a href="#">
-          <span class="material-icons-outlined">calendar_month</span>
-          <h3>Calendar</h3>
-        </a>
-        <a href="{% url 'logout' %}">
-          <span class="material-icons-outlined">logout</span>
-          <h3>Logout</h3>
-        </a>
-      </div>
-    </aside>
-    <main>
+{% extends 'main/base.html' %}
+
+{% block content %}
+  <main>
       <div class="top-main">
         <div class="main-text">
           <h1>Good Evening, {{request.user}}!</h1>
@@ -85,7 +35,7 @@
         </form>
       </div>
     </main>
-    <div class="rightside">
+  <div class="rightside">
       <div class="challenges">
         <div class="card-right">
           asdasda
@@ -115,6 +65,4 @@
         </div>
       </div>
     </div>
-  </div>
-</body>
-</html>
+{% endblock %}

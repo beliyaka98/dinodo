@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Task, UserChallenge
+from .models import Task, UserChallenge, Profile
 import datetime
 
 def loginPage(request):
@@ -52,6 +52,10 @@ def mainPage(request):
     context = {'tasks': tasks, 'challenges': challenges, 'day': day, 'month': month, 'weekday': weekday}
     return render(request, 'main/main.html', context)
 
+def friends(request):
+    profile = Profile.objects.get(user=request.user)
+    context = {'profile': profile}
+    return render(request, 'main/friends.html', context)
 
 def logoutPage(request):
     logout(request)
