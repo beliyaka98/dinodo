@@ -1,3 +1,44 @@
-h1{
-    color:red;
+.friends{
+    height: 100vh;
+    padding-left: 5rem;
+    display: grid;
+    grid-template-rows: 14rem auto;
+    padding-right: 10rem;
+}
+
+.friens-list{
+  display: grid;
+  grid-template-columns: auto auto;
+  place-items: center;
+  overflow-y: auto;
+}
+
+.friend-card{
+  height: 20rem;
+  width: 20rem;
+  background-color: gray;
+  filter: drop-shadow(0px 0px 8px rgba(0,0,0,0.15));
+  border-radius: 13px;
+  margin-bottom: 3rem;
+
+}
+
+.all-users{
+    height: 100vh;
+    padding-left: 5rem;
+    display: grid;
+    grid-template-rows: 14rem auto;
+    padding-right: 5rem;
+}
+
+.users-list{
+  display: grid;
+  overflow-y: auto;
+}
+
+.users{
+  max-width: 20rem;
+  width: 100%;
+  align-items: center;
+
 }
