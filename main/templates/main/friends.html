@@ -4,17 +4,36 @@
 <link rel="stylesheet" href="{% static 'main/friends.css' %}">
 {% endblock %}
 {% block content %}
-    <div class="main-friends">
-        <h1>{{ profile.user }}</h1>
-        {% for friend in profile.get_friends %}
-            {{friend}}
-            <img src="{% static friend.profile.photo %}">
-        {% endfor %}
+    <div class='friends'>
+      <div class='top-main'>
+        <h1>{{ profile.user }}, here your cool friends!</h1>
+      </div>
+      <div class="friens-list">
+          {% for friend in profile.get_friends %}
+            <div class="friend-card">
+                {{friend}}
+                <img src="{% static friend.profile.photo %}">
+            </div>
+          {% endfor %}
+      </diV>
     </div>
     <div class="all-users">
-        {% for user in profile.get_not_user %}
-            {{user}}
+      <div class='top-main'>
+        <h1>don't be a log, find yourself a friend!</h1>
+      </div>
+      <div class="users-list">
+        <div class="find_friend">
+          <input type="text" placeholder="your friend looks like frog?">
+          <input type="submit" value="X">
+        </div>
+          {% for user in profile.get_not_user %}
+            <div class="users">
+               {{user}}
             <img src="{% static user.photo %}">
-        {% endfor %}
+            </div>
+          {% endfor %}
+      </div>
     </div>
+  </div>
+
 {% endblock %}
