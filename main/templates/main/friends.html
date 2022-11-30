@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'main/friends.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="main-friends">
+        <h1>{{ profile.user }}</h1>
+        {% for friend in profile.get_friends %}
+            {{friend}}
+            <img src="{% static friend.profile.photo %}">
+        {% endfor %}
+    </div>
+    <div class="all-users">
+        {% for user in profile.get_not_user %}
+            {{user}}
+            <img src="{% static user.photo %}">
+        {% endfor %}
+    </div>
+{% endblock %}
