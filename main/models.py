@@ -2,13 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Profile(models.Model):
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.CharField(max_length=255, blank=True, null=False)
     experience = models.IntegerField(blank=True, null=False, default=0)
     levels = models.IntegerField(blank=True, null=False, default=0)
-
+    friends = models.ManyToManyField(User, blank=True, related_name='friends')
     def __str__(self):
         return self.user.username
+
 
 class Challenge(models.Model):
     COLOR_CHOICES = [
