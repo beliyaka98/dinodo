@@ -26,7 +26,8 @@ class Relationship(models.Model):
     status = models.CharField(max_length=8, choices=STATUS_CHOICES)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-
+    class Meta:
+        unique_together = ('sender', 'receiver')
     def __str__(self):
         return f"{self.sender}-{self.receiver}-{self.status}"
 class Challenge(models.Model):

@@ -43,18 +43,18 @@
           <input type="text" placeholder="your friend looks like frog?">
           <input type="submit" value="X">
         </div>
-          {% for user in profile.get_not_user %}
+          {% for profile in profile.get_not_user %}
             <div class="users">
                 <div class="wrapper">
                     <div class="userss-text">
-                        <img src="{% static user.photo %}">
+                        <img src="{% static profile.photo %}">
                     </div>
                     <div class="userss-text">
-                        <span>{{user}}</span>
+                        <span>{{profile}}</span>
                     </div>
                 </div>
                 <div class="userss-text">
-                    <input type="submit" value="Add">
+                    <a href="{% url 'create_relationship' profile_id=profile.id %}">Add</a>
                 </div>
             </div>
           {% endfor %}
