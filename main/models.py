@@ -54,6 +54,8 @@ class UserChallenge(models.Model):
     self_hours = models.IntegerField(null=False, default=0)
     is_finished = models.BooleanField(null=False, default=False)
 
+    class Meta:
+        unique_together = ('challenge', 'participant',)
     def __str__(self):
         return self.participant.username + " : " + self.challenge.title
 

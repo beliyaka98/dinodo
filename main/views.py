@@ -52,11 +52,13 @@ def mainPage(request):
     context = {'tasks': tasks, 'challenges': challenges, 'day': day, 'month': month, 'weekday': weekday}
     return render(request, 'main/main.html', context)
 
+@login_required(login_url='login', redirect_field_name='')
 def friends(request):
     profile = Profile.objects.get(user=request.user)
     context = {'profile': profile}
     return render(request, 'main/friends.html', context)
 
+@login_required(login_url='login', redirect_field_name='')
 def logoutPage(request):
     logout(request)
     return redirect('login')
