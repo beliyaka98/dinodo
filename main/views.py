@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Task, UserChallenge, Profile
+from .models import Task, UserChallenge, Profile, Relationship
 import datetime
 
 def loginPage(request):
@@ -60,3 +60,10 @@ def friends(request):
 def logoutPage(request):
     logout(request)
     return redirect('login')
+
+def create_relationship(request, profile_id):
+    sender = request.user.profile
+    receiver = Profile.objects.get(id=profile_id)
+    if not Relationship.objects.filter(sender=sender, receiver=receiver):
+        relation = Relationship.objects.create(sender=sender, receiver=receiver, status='send')
+    return redirect('friends')
