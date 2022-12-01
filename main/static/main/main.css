@@ -132,7 +132,7 @@ b{
     width: 96%;
     margin: 0 auto;
     gap: 1.8rem;
-    grid-template-columns: 14rem auto 28rem;
+    grid-template-columns: 14rem auto 25rem;
 }
 
 aside{
@@ -223,11 +223,11 @@ aside .sidebar a:hover span{
 }
 
 main{
-    height: 100wh;
+    height: 100vh;
     padding-left: 5rem;
     display: grid;
     grid-template-rows: 14rem auto;
-    padding-right: 10rem;
+    padding-right: 6rem;
 
 }
 
