@@ -53,7 +53,7 @@ class UserChallenge(models.Model):
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
     self_hours = models.IntegerField(null=False, default=0)
     is_finished = models.BooleanField(null=False, default=False)
-
+#asd
     class Meta:
         unique_together = ('challenge', 'participant',)
     def __str__(self):
