@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <link rel="stylesheet" href="{% static 'main/main.css' %}">
-  {% block css%} {%endblock%}
+  {% block css %} {% endblock %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!--google fonts-->
@@ -26,8 +26,9 @@
         </div>
       </div>
       <div class="sidebar">
-        <a href="{% url 'main' %}" class="active">
-          <span class="material-icons-outlined">grid_view</span>
+
+        <a href="{% url 'main' %}" {% if request.path == "/" %}class="active"{% endif %}>
+          <span class="material-icons-outlined" >grid_view</span>
           <h3>ToDo</h3>
         </a>
         <a href="#">
@@ -38,7 +39,7 @@
           <span class="material-icons-outlined">local_fire_department</span>
           <h3>Challenges</h3>
         </a>
-        <a href="{% url 'friends' %}">
+        <a href="{% url 'friends' %}" {% if request.path == "/friends/" %}class="active"{% endif %}>
           <span class="material-icons-outlined">group</span>
           <h3>Friends</h3>
         </a>
@@ -46,7 +47,7 @@
           <span class="material-icons-outlined">calendar_month</span>
           <h3>Calendar</h3>
         </a>
-        <a href="{% url 'logout' %}">
+        <a href="{% url 'logout' %}" >
           <span class="material-icons-outlined">logout</span>
           <h3>Logout</h3>
         </a>
