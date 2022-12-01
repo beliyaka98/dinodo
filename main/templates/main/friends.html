@@ -11,8 +11,24 @@
       <div class="friens-list">
           {% for friend in profile.get_friends %}
             <div class="friend-card">
-                {{friend}}
-                <img src="{% static friend.profile.photo %}">
+                <div class="card-img">
+                    <img src="{% static friend.profile.photo %}" class="friends-logo">
+                </div>
+                <div class="card-name">
+                    <h2>{{friend}}</h2>
+                    <h2>{{friend.profile.levels}}</h2>
+                </div>
+                <div class="card-challenges">
+                    <div class="challenge-card">
+                        <h4>Challenge 0</h4>
+                    </div>
+                    <div class="challenge-card">
+                        <h4>Challenge 1</h4>
+                    </div>
+                    <div class="challenge-card">
+                        <h4>Challenge 2</h4>
+                    </div>
+                </div>
             </div>
           {% endfor %}
       </diV>
@@ -28,8 +44,17 @@
         </div>
           {% for user in profile.get_not_user %}
             <div class="users">
-               {{user}}
-            <img src="{% static user.photo %}">
+                <div class="wrapper">
+                    <div class="userss-text">
+                        <img src="{% static user.photo %}">
+                    </div>
+                    <div class="userss-text">
+                        <span>{{user}}</span>
+                    </div>
+                </div>
+                <div class="userss-text">
+                    <input type="submit" value="Add">
+                </div>
             </div>
           {% endfor %}
       </div>
