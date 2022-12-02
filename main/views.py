@@ -49,7 +49,9 @@ def mainPage(request):
 
     challenges = UserChallenge.objects.filter(participant=request.user)
     tasks = Task.objects.filter(user=request.user)
-    context = {'tasks': tasks, 'challenges': challenges, 'day': day, 'month': month, 'weekday': weekday}
+    relationship = Relationship.objects.filter(receiver=request.user.profile).filter(status='send')
+    profile = Profile.objects.get(user=request.user)
+    context = {'tasks': tasks, 'challenges': challenges, 'day': day, 'month': month, 'weekday': weekday,'profile': profile, 'relationship':relationship}
     return render(request, 'main/main.html', context)
 
 def friends(request):
@@ -67,3 +69,18 @@ def create_relationship(request, profile_id):
     if not Relationship.objects.filter(sender=sender, receiver=receiver):
         relation = Relationship.objects.create(sender=sender, receiver=receiver, status='send')
     return redirect('friends')
+
+def accept_relationship(request, profile_id):
+    receiver = request.user.profile
+    sender = Profile.objects.get(id = profile_id)
+    accept = Relationship.objects.get(sender=sender, receiver=receiver, status='send')
+    accept.status = 'accepted'
+    accept.save()
+    return redirect('main')
+
+def decline_relationship(request, profile_id):
+    receiver = request.user.profile
+    sender = Profile.objects.get(id = profile_id)
+    decline = Relationship.objects.get(sender=sender, receiver=receiver, status='send')
+    decline.delete()
+    return redirect('main')

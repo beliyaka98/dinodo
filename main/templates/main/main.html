@@ -1,5 +1,5 @@
 {% extends 'main/base.html' %}
-
+{% load static %}
 {% block content %}
   <main>
       <div class="top-main">
@@ -38,7 +38,23 @@
   <div class="rightside">
       <div class="challenges">
         <div class="card-right">
-          asdasda
+            {% for relation in relationship %}
+          <div class="card-mini">
+              <div class="card-mini-left">
+                  <span><img src="{% static relation.sender.photo %}"></span>
+              </div>
+              <div class="rightt">
+                  <div class="friendss-text">
+                      <a href=""><span>{{relation.sender}}</span></a>
+                      <span>Invited you to become his friend !</span>
+                  </div>
+                  <div class="acceptdecline">
+                      <a href="{% url 'accept_relationship' profile_id=relation.sender.id %}"><span class="accept">Accept</span></a>
+                      <a href="{% url 'decline_relationship' profile_id=relation.sender.id %}"><span class="decline">Decline</span></a>
+                  </div>
+              </div>
+          </div>
+            {% endfor %}
         </div>
       </div>
       <div class="notifications">

@@ -6,5 +6,7 @@ urlpatterns = [
     path('register/', views.registerPage, name='register'),
     path('logout/', views.logoutPage, name='logout'),
     path('friends/', views.friends, name='friends'),
-    path('createrelationship/<profile_id>/', views.create_relationship, name='create_relationship')
+    path('createrelationship/<profile_id>/', views.create_relationship, name='create_relationship'),
+    path('acceptrelationship/<profile_id>/', views.accept_relationship, name='accept_relationship'),
+    path('declinerelationship/<profile_id>/', views.decline_relationship, name='decline_relationship'),
 ]

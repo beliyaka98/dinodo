@@ -226,7 +226,7 @@ main{
     padding-left: 5rem;
     display: grid;
     grid-template-rows: 14rem auto;
-    padding-right: 10rem;
+    padding-right: 6rem;
 
 }
 
@@ -415,4 +415,58 @@ svg{
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.card-mini{
+  height: 5rem;
+  margin: 1rem 0 1rem;
+  display: flex;
+
+  padding-left: 1.8rem;
+}
+
+.card-mini-left{
+    display: flex;
+}
+
+.card-mini-left img{
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    justify-content: center;
+}
+
+.rightt{
+    display: flex;
+    flex-direction: column;
+}
+
+.friendss-text{
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    }
+
+.friendss-text a{
+    display: flex;
+    justify-content: center;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    color: blue;
+}
+
+.acceptdecline{
+    display: flex;
+    justify-content: end;
+    gap: 1rem;
+}
+
+.accept{
+    background-color: #419390;
+    font-size: 18px;
+}
+
+.decline{
+    background-color: #ff7782;
+    font-size: 18px;
 }
