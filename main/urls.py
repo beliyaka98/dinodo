@@ -9,4 +9,5 @@ urlpatterns = [
     path('createrelationship/<profile_id>/', views.create_relationship, name='create_relationship'),
     path('acceptrelationship/<profile_id>/', views.accept_relationship, name='accept_relationship'),
     path('declinerelationship/<profile_id>/', views.decline_relationship, name='decline_relationship'),
+    path('profile/', views.profilePage, name='profile'),
 ]

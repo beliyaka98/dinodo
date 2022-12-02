@@ -90,3 +90,9 @@ def decline_relationship(request, profile_id):
     decline = Relationship.objects.get(sender=sender, receiver=receiver, status='send')
     decline.delete()
     return redirect('main')
+
+def profilePage(request):
+    profile = Profile.objects.get(user=request.user)
+
+    context = {'profile': profile, }
+    return render(request, 'main/profile.html', context)

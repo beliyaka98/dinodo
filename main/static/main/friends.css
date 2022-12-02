@@ -1,15 +1,16 @@
+
 .friends{
     height: 100vh;
-    padding-left: 5rem;
+    padding-left: 3rem;
     display: grid;
     grid-template-rows: 10rem auto;
-    padding-right: 6rem;
+    padding-right: 2rem;
 }
 
 .friens-list{
   display: grid;
   grid-template-columns: 50% 50%;
-  padding: 2rem 2rem 0;
+  padding: 1rem 1rem 0;
   overflow-y: auto;
 }
 

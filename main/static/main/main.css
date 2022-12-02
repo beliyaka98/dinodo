@@ -131,7 +131,12 @@ b{
     width: 96%;
     margin: 0 auto;
     gap: 1.8rem;
-    grid-template-columns: 14rem auto 28rem;
+    grid-template-columns: 14rem auto;
+}
+
+.container1{
+    display:grid;
+    grid-template-columns: auto 24rem;
 }
 
 aside{
