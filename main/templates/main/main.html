@@ -9,9 +9,9 @@
         </div>
 
         <div class="date-main">
-          <h5>{{weekday}}</h5>
-          <span class="date-int">{{day}}</span>
-          <h4>{{month}}</h4>
+          <h5>{% now "D" %}</h5>
+          <span class="date-int">{% now "j"%}</span>
+          <h4>{% now "F" %}</h4>
         </div>
       </div>
       <div class="tasks">

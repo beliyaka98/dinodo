@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Subquery
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.CharField(max_length=255, blank=True, null=False, default='main/default_avatar.jpg')
@@ -10,8 +11,8 @@ class Profile(models.Model):
     def get_friends(self):
         return self.friends.all()
 
-    def get_not_user(self):
-        return Profile.objects.exclude(user=self.user)
+    def get_not_friends(self):
+        return Profile.objects.all().exclude(user__in=self.friends.all()).exclude(user=self.user)
     def __str__(self):
         return self.user.username
 
@@ -26,8 +27,10 @@ class Relationship(models.Model):
     status = models.CharField(max_length=8, choices=STATUS_CHOICES)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+
     class Meta:
         unique_together = ('sender', 'receiver')
+
     def __str__(self):
         return f"{self.sender}-{self.receiver}-{self.status}"
 class Challenge(models.Model):

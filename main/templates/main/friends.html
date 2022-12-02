@@ -43,7 +43,7 @@
           <input type="text" placeholder="your friend looks like frog?">
           <input type="submit" value="X">
         </div>
-          {% for profile in profile.get_not_user %}
+          {% for profile in profile.get_not_friends %}
             <div class="users">
                 <div class="wrapper">
                     <div class="userss-text">
@@ -55,6 +55,7 @@
                 </div>
                 <div class="userss-text">
                     <a href="{% url 'create_relationship' profile_id=profile.id %}">Add</a>
+
                 </div>
             </div>
           {% endfor %}
