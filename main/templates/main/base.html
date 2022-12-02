@@ -35,7 +35,7 @@
           <span class="material-icons-outlined">table_chart</span>
           <h3>Table</h3>
         </a>
-        <a href="#">
+        <a href="{% url 'challenges' %}" {% if request.path == "/challenges/" %}class="active"{% endif %}>
           <span class="material-icons-outlined">local_fire_department</span>
           <h3>Challenges</h3>
         </a>
@@ -47,7 +47,7 @@
           <span class="material-icons-outlined">calendar_month</span>
           <h3>Calendar</h3>
         </a>
-        <a href="{% url 'profile' %}" >
+        <a href="{% url 'profile' %}" {% if request.path == "/profile/" %}class="active"{% endif %}>
           <span class="material-icons-outlined">account_circle</span>
           <h3>Profile</h3>
         </a>

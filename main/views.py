@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, ChallengeCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Task, UserChallenge, Profile, Relationship
-import datetime
-
+from .models import Task, UserChallenge, Profile, Relationship, ChallengeRelationship, Challenge
+from django.contrib.auth.models import User
 
 def loginPage(request):
     if request.method == 'POST':
@@ -39,10 +38,6 @@ def registerPage(request):
 
 @login_required(login_url='login', redirect_field_name='')
 def mainPage(request):
-    my_time = datetime.datetime.utcnow()
-    day = my_time.day
-    month = my_time.strftime("%B")
-    weekday = my_time.strftime('%A')
 
     if request.method == 'POST':
         if request.POST['new-task']:
@@ -54,7 +49,7 @@ def mainPage(request):
     tasks = Task.objects.filter(user=request.user)
     relationship = Relationship.objects.filter(receiver=request.user.profile).filter(status='send')
     profile = Profile.objects.get(user=request.user)
-    context = {'tasks': tasks, 'challenges': challenges, 'day': day, 'month': month, 'weekday': weekday,'profile': profile, 'relationship':relationship}
+    context = {'tasks': tasks, 'challenges': challenges, 'profile': profile, 'relationship':relationship}
     return render(request, 'main/main.html', context)
 
 
@@ -93,6 +88,40 @@ def decline_relationship(request, profile_id):
 
 def profilePage(request):
     profile = Profile.objects.get(user=request.user)
-
     context = {'profile': profile, }
     return render(request, 'main/profile.html', context)
+
+def challenges(request):
+    challenge_form = ChallengeCreationForm()
+    my_challenges = Challenge.objects.filter(participants=request.user)
+    if request.method == 'POST':
+        challenge_form = ChallengeCreationForm(request.POST)
+        if challenge_form.is_valid():
+            challenge = challenge_form.save(commit=False)
+            challenge.reward = challenge.hours
+            challenge.creator = request.user
+            challenge.save()
+            UserChallenge.objects.create(participant=request.user, challenge=challenge)
+            for user_id in request.POST.getlist('challengefriends'):
+                receiver = User.objects.get(id=int(user_id))
+                ChallengeRelationship.objects.create(sender=request.user.profile, receiver=receiver.profile, challenge=challenge, status='send')
+
+            return redirect('challenges')
+    challenge_relationship = ChallengeRelationship.objects.filter(receiver=request.user.profile).filter(status='send')
+    context = {'challenge_form': challenge_form, 'challenge_relationship': challenge_relationship, 'my_challenges': my_challenges}
+    return render(request, 'main/challenges.html', context=context)
+
+def accept_challenge_relationship(request, profile_id):
+    receiver = request.user.profile
+    sender = Profile.objects.get(id = profile_id)
+    accept = ChallengeRelationship.objects.get(sender=sender, receiver=receiver, status='send')
+    accept.status = 'accepted'
+    accept.save()
+    return redirect('challenges')
+
+def decline_challenge_relationship(request, profile_id):
+    receiver = request.user.profile
+    sender = Profile.objects.get(id = profile_id)
+    decline = ChallengeRelationship.objects.get(sender=sender, receiver=receiver, status='send')
+    decline.delete()
+    return redirect('challenges')

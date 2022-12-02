@@ -49,8 +49,28 @@ class Challenge(models.Model):
     reward = models.IntegerField(blank=False,null=False, default=0)
     color = models.CharField(max_length=7, choices=COLOR_CHOICES, blank=True, null=False, default='#3A86FF')
 
+    def get_all_self_hours(self):
+        return UserChallenge.objects.filter(challenge=self)
     def __str__(self):
         return self.title
+
+class ChallengeRelationship(models.Model):
+    STATUS_CHOICES = [
+        ('send', 'send'),
+        ('accepted', 'accepted'),
+    ]
+    sender = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='challenge_sender')
+    receiver = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='challenge_receiver')
+    challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE, related_name='relation_challenge')
+    status = models.CharField(max_length=8, choices=STATUS_CHOICES)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('sender', 'receiver', 'challenge', )
+
+    def __str__(self):
+        return f"{self.sender}-{self.receiver}-{self.challenge}-{self.status}"
 
 class UserChallenge(models.Model):
     participant = models.ForeignKey(User, on_delete=models.CASCADE)

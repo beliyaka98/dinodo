@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div>
+    <form method="post">
+      {% csrf_token %}
+      {{challenge_form}}
+      {% for friend in request.user.profile.get_friends %}
+        <input type="checkbox" id="{{friend.id}}" name="challengefriends" value="{{friend.id}}">
+        <label for="{{friend.id}}"> {{friend}}</label><br>
+      {% endfor %}
+      <input type="submit" value="Create challenge">
+
+    </form>
+
+    <div class="card-right">
+      {% for relation in challenge_relationship %}
+        <div class="card-mini">
+          <div class="rightt">
+            <div class="friendss-text">
+              <a href=""><span>{{relation.sender}}</span></a>
+              <span>challenged you! {{relation.challenge}}</span>
+            </div>
+            <div class="acceptdecline">
+              <a href="{% url 'accept_challenge_relationship' profile_id=relation.sender.id %}"><span class="accept">Accept</span></a>
+              <a href="{% url 'decline_challenge_relationship' profile_id=relation.sender.id %}"><span class="decline">Decline</span></a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% for my_challenge in my_challenges %}
+        {{my_challenge}}
+        {% for record in my_challenge.get_all_self_hours %}
+          {{record.participant}}
+          {{record.self_hours}}
+        {% endfor %}
+      {% endfor %}
+    </div>
+
+  </div>
+
+{% endblock %}
