@@ -6,6 +6,7 @@ from django.contrib import messages
 from .models import Task, UserChallenge, Profile, Relationship
 import datetime
 
+
 def loginPage(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -17,6 +18,7 @@ def loginPage(request):
             return redirect('main')
         messages.add_message(request, messages.ERROR, 'Username or password is incorrect!')
     return render(request, 'main/login.html')
+
 
 def registerPage(request):
     form = CustomUserCreationForm()
@@ -31,8 +33,9 @@ def registerPage(request):
                 messages.add_message(request, messages.SUCCESS, 'Registration successful.')
                 return redirect('main')
 
-    context = {'form':form}
+    context = {'form': form}
     return render(request, 'main/register.html', context=context)
+
 
 @login_required(login_url='login', redirect_field_name='')
 def mainPage(request):
@@ -54,14 +57,17 @@ def mainPage(request):
     context = {'tasks': tasks, 'challenges': challenges, 'day': day, 'month': month, 'weekday': weekday,'profile': profile, 'relationship':relationship}
     return render(request, 'main/main.html', context)
 
+
 def friends(request):
     profile = Profile.objects.get(user=request.user)
     context = {'profile': profile}
     return render(request, 'main/friends.html', context)
 
+
 def logoutPage(request):
     logout(request)
     return redirect('login')
+
 
 def create_relationship(request, profile_id):
     sender = request.user.profile
