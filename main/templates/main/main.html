@@ -1,7 +1,9 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block content %}
-  <main>
+<div class="container1">
+    <main>
+
       <div class="top-main">
         <div class="main-text">
           <h1>Good Evening, {{request.user}}!</h1>
@@ -35,7 +37,7 @@
         </form>
       </div>
     </main>
-  <div class="rightside">
+    <div class="rightside">
       <div class="challenges">
         <div class="card-right">
             {% for relation in relationship %}
@@ -81,4 +83,5 @@
         </div>
       </div>
     </div>
+</div>
 {% endblock %}
