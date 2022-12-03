@@ -52,25 +52,25 @@ def mainPage(request):
     context = {'tasks': tasks, 'challenges': challenges, 'profile': profile, 'relationship':relationship}
     return render(request, 'main/main.html', context)
 
-
+@login_required(login_url='login', redirect_field_name='')
 def friends(request):
     profile = Profile.objects.get(user=request.user)
     context = {'profile': profile}
     return render(request, 'main/friends.html', context)
 
-
+@login_required(login_url='login', redirect_field_name='')
 def logoutPage(request):
     logout(request)
     return redirect('login')
 
-
+@login_required(login_url='login', redirect_field_name='')
 def create_relationship(request, profile_id):
     sender = request.user.profile
     receiver = Profile.objects.get(id=profile_id)
     if not Relationship.objects.filter(sender=sender, receiver=receiver):
         relation = Relationship.objects.create(sender=sender, receiver=receiver, status='send')
     return redirect('friends')
-
+@login_required(login_url='login', redirect_field_name='')
 def accept_relationship(request, profile_id):
     receiver = request.user.profile
     sender = Profile.objects.get(id = profile_id)
@@ -78,19 +78,19 @@ def accept_relationship(request, profile_id):
     accept.status = 'accepted'
     accept.save()
     return redirect('main')
-
+@login_required(login_url='login', redirect_field_name='')
 def decline_relationship(request, profile_id):
     receiver = request.user.profile
     sender = Profile.objects.get(id = profile_id)
     decline = Relationship.objects.get(sender=sender, receiver=receiver, status='send')
     decline.delete()
     return redirect('main')
-
+@login_required(login_url='login', redirect_field_name='')
 def profilePage(request):
     profile = Profile.objects.get(user=request.user)
     context = {'profile': profile, }
     return render(request, 'main/profile.html', context)
-
+@login_required(login_url='login', redirect_field_name='')
 def challenges(request):
     challenge_form = ChallengeCreationForm()
     my_challenges = Challenge.objects.filter(participants=request.user)
@@ -110,7 +110,7 @@ def challenges(request):
     challenge_relationship = ChallengeRelationship.objects.filter(receiver=request.user.profile).filter(status='send')
     context = {'challenge_form': challenge_form, 'challenge_relationship': challenge_relationship, 'my_challenges': my_challenges}
     return render(request, 'main/challenges.html', context=context)
-
+@login_required(login_url='login', redirect_field_name='')
 def accept_challenge_relationship(request, profile_id):
     receiver = request.user.profile
     sender = Profile.objects.get(id = profile_id)
@@ -118,7 +118,7 @@ def accept_challenge_relationship(request, profile_id):
     accept.status = 'accepted'
     accept.save()
     return redirect('challenges')
-
+@login_required(login_url='login', redirect_field_name='')
 def decline_challenge_relationship(request, profile_id):
     receiver = request.user.profile
     sender = Profile.objects.get(id = profile_id)

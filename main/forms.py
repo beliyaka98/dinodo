@@ -19,3 +19,6 @@ class ChallengeCreationForm(ModelForm):
     class Meta:
         model = Challenge
         fields = ['title', 'description', 'hours', 'color']
+    def __init__(self, *args, **kwargs):
+        super(ChallengeCreationForm, self).__init__(*args, **kwargs)
+        self.fields['description'].widget.attrs.update({'id': 'descr'})

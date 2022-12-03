@@ -1,7 +1,8 @@
 {% extends 'main/base.html' %}
 {% load static %}
-{% block css %}
+{% block cssjs %}
 <link rel="stylesheet" href="{% static 'main/challenges.css' %}">
+<script type="text/javascript" src="{% static 'main/challenges.js' %}"></script>
 {% endblock %}
 {% block content %}
   <div class="challenge-main">
@@ -70,15 +71,4 @@
     </div>
   </div>
 {% endblock %}
-{% block script %}
-<script type="text/javascript">
-  function nada(){
-    document.querySelector(".popup").classList.add("active");
-  };
 
-  function nenada(){
-    document.querySelector(".popup").classList.remove("active");
-  };
-
-</script>
-{% endblock %}
