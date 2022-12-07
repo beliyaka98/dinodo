@@ -15,8 +15,8 @@ class Profile(models.Model):
         return Profile.objects.all().exclude(user__in=self.friends.all()).exclude(user=self.user)
     def __str__(self):
         return self.user.username
-
-
+    def get_challenges(self):
+        return UserChallenge.objects.filter(participant=self.user)
 class Relationship(models.Model):
     STATUS_CHOICES = [
         ('send', 'send'),

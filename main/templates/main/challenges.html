@@ -9,13 +9,17 @@
     <div class="challenge-main-left">
       <div class="challenge-main-card">
         <div class="challenge-card-top">
-          {% for my_challenge in my_challenges %}
-          <div class="challenge-card-main" style="background-color: #95bfbd;">
-            {{my_challenge}}
-            {% for record in my_challenge.get_all_self_hours %}
+          {% for challenge in challenges %}
+          <div class="challenge-card-main" style="background-color: {{challenge.challenge.color}};">
+            <span>{{challenge.challenge}}</span>
+
+            <!--{% for record in my_challenge.get_all_self_hours %}
               {{record.participant}}
               {{record.self_hours}}
-            {% endfor %}
+            {% endfor %}-->
+            <div class="card-cel">
+              <span>{{challenge.self_hours}}/{{challenge.challenge.hours}}</span>
+            </div>
           </div>
           {% endfor %}
         </div>
@@ -42,9 +46,7 @@
             </form>
           </div>
         </div>
-        <!--
-
-
+<!--
         <div class="card-right">
           {% for relation in challenge_relationship %}
             <div class="card-mini">
@@ -60,14 +62,15 @@
               </div>
             </div>
           {% endfor %}
-
-
-
-
-        </div>-->
+        </div>
+-->
       </div>
     </div>
     <div class="challenge-main-right">
+      <div class="challenge-main-right-card">
+        <div class="content1">
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}

@@ -94,6 +94,7 @@ def profilePage(request):
 def challenges(request):
     challenge_form = ChallengeCreationForm()
     my_challenges = Challenge.objects.filter(participants=request.user)
+    challenges1 = UserChallenge.objects.filter(participant=request.user)
     if request.method == 'POST':
         challenge_form = ChallengeCreationForm(request.POST)
         if challenge_form.is_valid():
@@ -108,7 +109,7 @@ def challenges(request):
 
             return redirect('challenges')
     challenge_relationship = ChallengeRelationship.objects.filter(receiver=request.user.profile).filter(status='send')
-    context = {'challenge_form': challenge_form, 'challenge_relationship': challenge_relationship, 'my_challenges': my_challenges}
+    context = {'challenge_form': challenge_form, 'challenge_relationship': challenge_relationship, 'my_challenges': my_challenges, 'challenges':challenges1}
     return render(request, 'main/challenges.html', context=context)
 @login_required(login_url='login', redirect_field_name='')
 def accept_challenge_relationship(request, profile_id):
