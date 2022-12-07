@@ -20,16 +20,11 @@
                     <h2>{{friend.profile.levels}}</h2>
                 </div>
                 <div class="card-challenges">
-                    <div class="challenge-card">
-                        <h4>Challenge 0</h4>
-                    </div>
-                    <div class="challenge-card">
-                        <h4>Challenge 1</h4>
-                    </div>
-                    <div class="challenge-card">
-                        <h4>Challenge 2</h4>
-                    </div>
-
+                    {% for item in friend.profile.get_challenges %}
+                        <div class="challenge-card">
+                            <h4>{{item.challenge}}</h4>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
           {% endfor %}

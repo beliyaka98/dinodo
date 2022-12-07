@@ -1,19 +1,19 @@
 .challenge-main{
     height: 100vh;
     display: grid;
-    grid-template-columns: 50vw auto;
+    grid-template-columns: 40vw auto;
 }
 
 .challenge-main-left{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 4rem;
+    padding-left: 2rem;
 }
 
 .challenge-main-card{
     height: 90vh;
-    width: 46vw;
+    width: 36vw;
     background-color: white;
     filter: drop-shadow(0px 0px 15px rgba(0,0,0,0.15));
     display: grid;
@@ -32,14 +32,22 @@
 }
 
 .challenge-card-main{
+    background-color: lightgray;
     display: flex;
     align-items: center;
     border-radius: 23px;
     height: 8vh;
     padding-left: 2rem;
+    padding-right: 2rem;
     font-size: 1.5rem;
     font-weight: 600;
     color: white;
+    cursor: pointer;
+    justify-content: space-between;
+}
+
+.challenge-card-main:hover{
+    background-color: var(--color-primary)
 }
 
 .challenge-card-bottom{
@@ -141,9 +149,23 @@
 
 .popup textarea{
     height: 50px;
+    width: 100%;
 
 }
+.challenge-main-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+}
 
+.challenge-main-right-card{
+    height: 90vh;
+    width: 30vw;
+    background-color: white;
+    filter: drop-shadow(0px 0px 15px rgba(0,0,0,0.15));
+    border-radius: 23px;
+}
 
 
 
